@@ -7,7 +7,7 @@
         @csrf
         <div class="mb-3">
             <label for="skills" class="form-label">Programming Language & Tools</label>
-            <input type="text" class="form-control form-control-sm" name="skills" id="skills" aria-describedby="helpId" placeholder="Input your skills here" value="{{ getMetaValue('skills') }}"/>
+            <input type="text" class="form-control form-control-sm skill" name="skills" id="skills" aria-describedby="helpId" placeholder="Input your skills here" value="{{ getMetaValue('skills') }}"/>
         </div>
         <div class="mb-3">
             <label for="workflow" class="form-label">Workflow</label>
@@ -17,3 +17,17 @@
     </form>
     
 @endsection
+
+@push('tokenfield-js')
+<script>
+    $(document).ready(function() {
+        $('.skill').tokenfield({
+            autocomplete: {
+                source: [{!! $skills !!}],
+                delay: 100
+            },
+            showAutocompleteOnFocus: true
+        });
+    });
+</script>
+@endpush

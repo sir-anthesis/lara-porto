@@ -9,7 +9,13 @@ class skillController extends Controller
 {
     public function index()
     {
-        return view('dashboard.skill.index');
+        $skills_url = public_path('dashboardTemp/devicon.json');
+        $skills_datas = file_get_contents($skills_url);
+        $skills_datas = json_decode($skills_datas, true);
+        $skills = array_column($skills_datas, 'name');
+        $skills = "'" . implode("','", $skills) . "'";
+
+        return view('dashboard.skill.index')->with('skills', $skills);
     }
 
     public function update(Request $request)
